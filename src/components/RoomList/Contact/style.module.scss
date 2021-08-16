@@ -1,0 +1,45 @@
+.contact{
+    display: flex;
+    align-items: center;
+
+    .fanpage{
+
+        padding: 0 35px 0 20px;
+
+        .brand{
+            width: 25px;
+            margin-left: 11px;
+        }
+
+    }
+
+
+    
+
+    .contact-wrap{
+
+        padding-left: 27px;
+        border-left: #FFFFFF 1px solid;
+        height: 91px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .contact-info{
+            color: #FFFFFF;
+            display: flex;
+    
+            .icon{
+                width: 20px;
+                margin-right: 21px;
+            }
+            span{
+                font-size: 14px;
+            }
+        }
+
+    }
+
+    
+    
+}
