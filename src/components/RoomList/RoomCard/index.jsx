@@ -13,7 +13,7 @@ export default function RoomCard(props) {
     const { info } = props;
     return(
         <div className={cx('room-card')}>
-            <img src={require('../../../img/room_1-3.jpeg')} alt="preview"/>
+            <img src={require(`../../../img/${info.image}`)} alt="preview"/>
             {info.type}
 
         </div>
