@@ -13,8 +13,21 @@ export default function RoomCard(props) {
     const { info } = props;
     return(
         <div className={cx('room-card')}>
-            <img src={require(`../../../img/${info.image}`)} alt="preview"/>
-            {info.type}
+            <div className={cx('room-photo')}>
+                <img src={require(`../../../img/${info.imageURL}`)} alt="preview"/>
+            </div>
+            <div className={cx('room-info')}>
+                <span className={cx('room-name')}>{info.name}</span>
+                <span className={cx('type')}>{info.type}</span>
+                <div className={cx('price-info')}>
+                    
+
+                        <span>NT.{info.normalDayPrice} <span>平日</span></span>
+                        <span>NT.{info.holidayPrice} 假日</span>
+
+
+                </div>
+            </div>
 
         </div>
     )

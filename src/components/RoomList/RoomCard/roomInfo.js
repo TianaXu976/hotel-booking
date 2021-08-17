@@ -1,27 +1,47 @@
 const roomInfo = [
     {
-        type:'Single Room',
-        image:'room_1-3.jpeg'
+        name:'Single Room',
+        type:'雙人房',
+        imageURL:'room_1-3.jpeg',
+        normalDayPrice:'1380',
+        holidayPrice:'1500',
+
     },
     {
-        type:'Deluxe Single Room',
-        image:'room_2-3.jpeg'
+        name:'Deluxe Single Room',
+        type:'雙人房',
+        imageURL:'room_2-3.jpeg',
+        normalDayPrice:'1380',
+        holidayPrice:'1500',
     },
     {
-        type:'Double Room',
-        image:'room_3-2.jpeg'
+        name:'Double Room',
+        type:'雙人房',
+        imageURL:'room_3-2.jpeg',
+        normalDayPrice:'1380',
+        holidayPrice:'1500',
     },
     {
-        type:'Deluxe Double Room',
-        image:'room_4-2.jpeg'
+        name:'Deluxe Double Room',
+        type:'雙人房',
+        imageURL:'room_4-2.jpeg',
+        normalDayPrice:'1380',
+        holidayPrice:'1500',
     },
     {
-        type:'Twin Room',
-        image:'room_5-1.jpeg'
+        name:'Twin Room',
+        type:'雙人房',
+        imageURL:'room_5-1.jpeg',
+        normalDayPrice:'1380',
+        holidayPrice:'1500',
     },
     {
-        type:'Deluxe Twin Room',
-        image:'room_6-2.jpeg'
+        name:'Deluxe Twin Room',
+        type:'雙人房',
+        imageURL:'room_6-2.jpeg',
+        normalDayPrice:'1380',
+        holidayPrice:'1500',
+        
     },
 
 ]
