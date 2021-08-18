@@ -18,14 +18,9 @@ export default function RoomCard(props) {
             </div>
             <div className={cx('room-info')}>
                 <span className={cx('room-name')}>{info.name}</span>
-                <span className={cx('type')}>{info.type}</span>
-                <div className={cx('price-info')}>
-                    
-
-                        <span>NT.{info.normalDayPrice} <span>平日</span></span>
-                        <span>NT.{info.holidayPrice} 假日</span>
-
-
+                <div className={cx('price-info')}>  
+                    <span>NT.{info.normalDayPrice} <span>平日</span></span>
+                    <span>NT.{info.holidayPrice} 假日</span>
                 </div>
             </div>
 

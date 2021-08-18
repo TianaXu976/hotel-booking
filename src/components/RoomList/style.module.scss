@@ -1,32 +1,41 @@
 .container{
-    // height: fit-content;
     position: relative;
-    // background-color: tomato;
 }
 
 .banner{
     height: 660px;
-    background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)),url('../../img/room_4-2.jpeg') no-repeat center bottom /cover;
+    background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15));
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    transition: background-image 2s ;
+  
     .logo{
         margin: 155px 0 47px 0;
-
     }
-    
 }
 
 .room-cards{
-    width: 944px;
+    max-width: 944px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding-bottom: 100px;
+    padding: 0 20px;
     position: absolute;
     top: 553px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    
+    left: 0;
+    right: 0;
+    margin: auto;   
+}
+
+@media screen and (max-width: 1023px){
+    .room-cards{
+        width: 622px;
+    }
+}
+
+@media screen and (max-width: 622px){
+    .room-cards{
+        width: 300px;
+    }
 }

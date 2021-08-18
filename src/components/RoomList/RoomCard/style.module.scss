@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400&display=swap');
 
+span{
+    font-family: 'Noto Sans TC', sans-serif;
+    letter-spacing: 1.25px;
+    font-weight: 300;
+}
+
 .room-card{
     height: 350px;
     width: 300px;
@@ -7,25 +13,17 @@
     margin-bottom: 58px;
     position: relative;
     cursor: pointer;
-    
+    box-shadow: 2px 2px 9px 0 rgba(0,0,0,0.18);
 
-
-    span{
-        font-family: 'Noto Sans TC', sans-serif;
-        letter-spacing: 1.25px;
-        font-weight: 300;
-    }
     .room-photo{
         width: 100%;
         height: 280px;
         overflow: hidden;
-
-    }
-
-    img{
-        width: 100%;
-        height: 100%;
-        object-fit:cover;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit:cover;
+        }
     }
 
     .room-info{
@@ -39,18 +37,8 @@
         display: flex;
         flex-direction: column;
         transition: height .3s;
-        
-
         .room-name{
             font-size: 14px;
-
-        }
-        .type{
-            opacity: 0;
-            font-size: 12px;
-            color: #6D7278 ;
-            margin-top: 2px;
-            transition: opacity .3s;
         }
         .price-info{
             display: flex;
@@ -59,9 +47,6 @@
             flex: 1;
             opacity: 0;
             transition: opacity .3s;
-
-
-
                 span:first-child{
                     font-size: 21px;
                     span{
@@ -72,23 +57,20 @@
                 span:last-child{
                     font-size: 12px;
                     color: #6D7278 ;
-                }
-
-            
-        }
-       
+                }            
+        }      
     }
 
     &:hover .room-info{
-        
-        height: 132px;
+        height: 110px;
     }
 
-    &:hover .price-info, &:hover .type{
-        
-        opacity: 1;
-       
-    }
+    &:hover .price-info{
+        opacity: 1;  
+    }  
+    &:hover .room-photo{
+        opacity: .8;
 
-    
+    }
 }
+
