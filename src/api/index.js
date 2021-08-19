@@ -11,3 +11,4 @@ const roomRequest = axios.create({
 })
 
 export const getRooms = () => roomRequest.get('/rooms');
+export const getInfomation = (data) => roomRequest.get(`/room/${data}`);

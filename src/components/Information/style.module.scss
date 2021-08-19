@@ -1,0 +1,86 @@
+@import '../../styles/mixins';
+
+.loading{
+  text-align: center;
+  margin-top: 30%;
+}
+
+.room-photo{
+  height: 596px;
+  display: flex;
+  
+  .colunm_1{
+    width: 70%;
+    height: 100%;
+    @include background-cover;
+    .logo{
+      margin: 32px 0 0 49px;
+    }
+
+  }
+  .colunm_2{
+    width: 30%;
+
+    div{
+      height: 50%;
+      @include background-cover;
+      margin-left: -1px;
+    }
+    
+  }
+}
+
+.room-info{
+  max-width: 1200px;
+  margin: auto;
+  padding: 47px 40px;
+}
+
+.detail{
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  .name{
+    font-size: 36px;
+    font-weight: 500;
+  }
+  .description-short{
+    margin-top: 30px;
+    line-height: 30px;
+  }
+  .description{
+    font-size: 12px;
+    margin-top: 20px;
+    line-height: 20px;
+  }
+  .divider{
+    display: flex;
+    margin: 30px 0 20px -5px ;
+    div{
+      height: 14px;
+      width: 14px;
+      border-top: 1px solid #000000;
+      transform: rotate(45deg);
+      position: relative;
+    }
+  }
+
+  .checkInAndOut{
+    display: flex;
+    div{
+      display: flex;
+      flex-direction: column;
+      span:last-child{
+        font-size: 21px;
+        line-height: 30px;
+      }
+      &:last-child{
+        margin-left: 96px;
+      }
+    }
+  }
+
+
+
+
+}

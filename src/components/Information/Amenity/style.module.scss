@@ -1,0 +1,30 @@
+.amenities{
+  margin-top: 40px;
+  background-color: #F0F0F0 ;
+  height: 210px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  
+  .amenity{
+    font-size: 12px;
+    color: #a5a5a5;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    
+    &.active{
+      color: #000000;
+    }
+    .icon{
+      width: 20px;
+      padding-left: 20px;
+    }
+    span{
+      margin-left: 10px;
+    }
+  }
+
+
+}
