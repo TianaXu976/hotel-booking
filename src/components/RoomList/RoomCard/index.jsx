@@ -14,7 +14,7 @@ export default function RoomCard(props) {
     return(
         <div className={cx('room-card')}>
             <div className={cx('room-photo')}>
-                <img src={require(`../../../img/${info.imageURL}`)} alt="preview"/>
+                <img src={info.imageUrl} alt="preview"/>
             </div>
             <div className={cx('room-info')}>
                 <span className={cx('room-name')}>{info.name}</span>
