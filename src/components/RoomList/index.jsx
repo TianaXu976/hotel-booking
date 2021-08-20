@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import classnames from "classnames/bind";
 import styles from "./style.module.scss";
 import { getRooms } from "../../api";
+
 import Loading from "../Loading";
 
 import { ReactComponent as Logo } from "../../img/logo_white.svg";
@@ -44,10 +45,13 @@ export default function RoomList() {
         <Logo className={cx("logo")} />
         <Contact />
       </div>
-      {roomList.length > 0 ? (
+      {roomList.length > 0 ? 
+      (
         <div className={cx("room-cards")}>
           {roomList.map((item) => (
-            <RoomCard key={item.id} info={item} />
+            
+              <RoomCard key={item.id} info={item} />
+            
           ))}
         </div>
       ) : (

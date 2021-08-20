@@ -4,22 +4,22 @@ import styles from "./style.module.scss";
 import { getInfomation } from "../../api";
 import { ReactComponent as Logo } from "../../img/logo_block.svg";
 import Amenity from "./Amenity";
-import Loading from "../Loading"
+import Loading from "../Loading";
 
 const cx = classnames.bind(styles);
 
-export default function Information() {
+export default function Information({ match }) {
   const [info, setInfo] = useState();
+
   useEffect(() => {
     try {
-      getInfomation(
-        "3Elqe8kfMxdZv5xFLV4OUeN6jhmxIvQSTyj4eTgIowfIRvF4rerA2Nuegzc2Rgwu"
-      ).then((response) => setInfo(response.data.room[0]));
+      getInfomation(match.params.id).then((response) =>
+        setInfo(response.data.room[0])
+      );
     } catch (error) {
       console.error(error);
     }
   }, []);
-
 
   if (!info) {
     return (
@@ -73,7 +73,16 @@ export default function Information() {
               <span>{info.checkInAndOut["checkOut"]} </span>
             </div>
           </div>
-          <Amenity amenitiesState={info.amenities}/>
+          <Amenity amenitiesState={info.amenities} />
+        </div>
+        <div className={cx("room-price")}>
+          {/* <div className={cx("normal-day")}> */}
+          <span className={cx("normal-day")}>NT.{info.normalDayPrice}</span>
+          <span>平日(一～四)</span>
+
+          {/* <div className={cx("holiday-day")}> */}
+          <span className={cx("holiday-day")}>NT.{info.holidayPrice}</span>
+          <span>假日(五～日)</span>
         </div>
       </div>
     </div>

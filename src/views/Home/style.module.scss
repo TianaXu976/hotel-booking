@@ -5,4 +5,10 @@ body{
   font-weight: 300;
   letter-spacing: 1.25px;
   font-size: 14px;
+  color: #000000;
+
+  a { 
+    text-decoration: none; 
+    color: inherit;
+  }
 }
