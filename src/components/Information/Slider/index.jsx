@@ -26,8 +26,8 @@ export default function Slider({ img }) {
         }}
         navigation={true}
       >
-        {img.map((element) => (
-          <SwiperSlide>
+        {img.map((element, index) => (
+          <SwiperSlide key={index}>
             <div
               className={cx("img-detail")}
               style={{ backgroundImage: `url(${element})` }}

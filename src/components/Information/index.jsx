@@ -6,15 +6,18 @@ import { ReactComponent as Logo } from "../../img/logo_block.svg";
 import Amenity from "./Amenity";
 import Loading from "../Loading";
 import Slider from "./Slider";
+import { useHistory } from "react-router-dom";
 
 const cx = classnames.bind(styles);
 
-export default function Information({ match }) {
+export default function Information() {
   const [info, setInfo] = useState();
+
+  const history = useHistory();
 
   useEffect(() => {
     try {
-      getInfomation(match.params.id).then((response) =>
+      getInfomation(history.location.pathname).then((response) =>
         setInfo(response.data.room[0])
       );
     } catch (error) {
@@ -34,7 +37,9 @@ export default function Information({ match }) {
     <div className={cx("container")}>
       <div className={cx("room-photo")}>
         <Slider img={info.imageUrl} />
-        <Logo className={cx("logo")} />
+        <div className={cx("logo")} onClick={() => history.push("/")}>
+          <Logo />
+        </div>
       </div>
 
       <div className={cx("room-info")}>
