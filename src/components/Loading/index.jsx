@@ -1,9 +1,7 @@
 import React from "react";
 import { CircularProgress } from "@material-ui/core";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
-import grey from '@material-ui/core/colors/grey'
-
-
+import grey from "@material-ui/core/colors/grey";
 
 const theme = createTheme({
   palette: {
@@ -11,14 +9,12 @@ const theme = createTheme({
       main: grey[300],
     },
   },
-})
-
+});
 
 export default function Loading() {
-
   return (
     <ThemeProvider theme={theme}>
-      <CircularProgress size={30}/>
+      <CircularProgress size={30} />
     </ThemeProvider>
   );
 }

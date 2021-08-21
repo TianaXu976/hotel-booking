@@ -1,0 +1,19 @@
+.swiper-container{
+  width: 95%;
+  height: 100%;
+
+  .swiper-pagination-bullet-active{
+    background-color: grey;
+  }
+
+  .swiper-button-prev, .swiper-button-next{
+    transform: scale(80%);
+    color: grey;
+
+  }
+
+
+  
+}
+
+

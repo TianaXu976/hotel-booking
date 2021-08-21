@@ -1,0 +1,27 @@
+@import '../../../styles/mixins';
+
+.slider{
+  height: 100%;
+  width: 100%;
+  
+
+
+
+
+  .img-detail{
+    @include background-cover;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+  }
+
+
+  
+}
+
+
+
+
+// .swiper-button-next{
+//   color: tomato;
+// }

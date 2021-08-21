@@ -5,6 +5,7 @@ import { getInfomation } from "../../api";
 import { ReactComponent as Logo } from "../../img/logo_block.svg";
 import Amenity from "./Amenity";
 import Loading from "../Loading";
+import Slider from "./Slider";
 
 const cx = classnames.bind(styles);
 
@@ -32,17 +33,10 @@ export default function Information({ match }) {
   return (
     <div className={cx("container")}>
       <div className={cx("room-photo")}>
-        <div
-          className={cx("colunm_1")}
-          style={{ backgroundImage: `url(${info.imageUrl[2]})` }}
-        >
-          <Logo className={cx("logo")} />
-        </div>
-        <div className={cx("colunm_2")}>
-          <div style={{ backgroundImage: `url(${info.imageUrl[0]})` }} />
-          <div style={{ backgroundImage: `url(${info.imageUrl[1]})` }} />
-        </div>
+        <Slider img={info.imageUrl} />
+        <Logo className={cx("logo")} />
       </div>
+
       <div className={cx("room-info")}>
         <div className={cx("detail")}>
           <span className={cx("name")}>{info.name}</span>

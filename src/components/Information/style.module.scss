@@ -1,5 +1,7 @@
 @import '../../styles/mixins';
 
+
+
 .loading{
   text-align: center;
   margin-top: 30%;
@@ -7,28 +9,20 @@
 
 
 
+
 .room-photo{
   height: 596px;
-  display: flex;
-  
-  .colunm_1{
-    width: 70%;
-    height: 100%;
-    @include background-cover;
-    .logo{
-      margin: 32px 0 0 49px;
-    }
+  background-color: #F7F7F7;
+  position: relative;
 
+  .logo{
+    position: absolute;
+    top: 32px;
+    left: 50px;
+    z-index: 1;
+    &:hover{cursor: pointer;}
   }
-  .colunm_2{
-    width: 30%;
-    div{
-      height: 50%;
-      @include background-cover;
-      margin-left: -1px;
-    }
-    
-  }
+
 }
 
 .room-info{
