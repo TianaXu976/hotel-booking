@@ -60,7 +60,6 @@
         width: 14px;
         border-top: 1px solid #000000;
         transform: rotate(45deg);
-        position: relative;
       }
     }
     .checkInAndOut{
@@ -100,11 +99,6 @@
     }
   }
 
-  .date-picker{
-    // background-color: red;
-    width: 450px;
-    display: flex;
-    justify-content: center;
-  }
+
 }
 

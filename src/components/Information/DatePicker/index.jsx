@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-// import classnames from "classnames/bind";
-// import styles from "./style.module.scss";
+import classnames from "classnames/bind";
+import styles from "./style.module.scss";
+import BookingDialog from "../BookingDialog";
+
 import "./date-range.scss";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
-// const cx = classnames.bind(styles);
+
+const cx = classnames.bind(styles);
 
 export default function DatePicker() {
   const [day, setDay] = useState([
@@ -17,20 +20,36 @@ export default function DatePicker() {
     },
   ]);
 
-  const atChange = (item) => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+
+  const handleChange = (item) => {
     setDay([item.selection]);
     console.log(item);
   };
 
   return (
-    <DateRange
-      onChange={atChange}
-      moveRangeOnFirstSelection={false}
-      ranges={day}
-      scroll={{ enabled: true }}
-      showDateDisplay={false}
-      rangeColors={["#747474"]}
-      showMonthAndYearPickers={false}
-    />
+    <div className={cx("date-picker")}>
+      <DateRange
+        onChange={handleChange}
+        moveRangeOnFirstSelection={false}
+        ranges={day}
+        scroll={{ enabled: true }}
+        showDateDisplay={false}
+        rangeColors={["#747474"]}
+        showMonthAndYearPickers={false}
+      />
+
+      <button className={cx('booking-btn')} onClick={handleClickOpen}>
+        預約時段
+      </button>
+
+      <BookingDialog open={open} setOpen={setOpen}/>
+ 
+    </div>
   );
 }

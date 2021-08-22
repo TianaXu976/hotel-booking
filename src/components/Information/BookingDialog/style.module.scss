@@ -1,0 +1,11 @@
+.divider{
+  display: flex;
+  margin: 0 0 10px 20px ;
+  div{
+    height: 14px;
+    width: 14px;
+    border-top: 1px solid #000000;
+    transform: rotate(45deg);
+  }
+}
+

@@ -84,9 +84,9 @@ export default function Information() {
           <span className={cx("holiday-day")}>NT.{info.holidayPrice}</span>
           <span>假日(五～日)</span>
         </div>
-        <div className={cx("date-picker")}>
+  
           <DatePicker />
-        </div>
+
       </div>
     </div>
   );
