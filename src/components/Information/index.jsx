@@ -6,6 +6,7 @@ import { ReactComponent as Logo } from "../../img/logo_block.svg";
 import Amenity from "./Amenity";
 import Loading from "../Loading";
 import Slider from "./Slider";
+import DatePicker from "./DatePicker";
 import { useHistory } from "react-router-dom";
 
 const cx = classnames.bind(styles);
@@ -82,6 +83,9 @@ export default function Information() {
           {/* <div className={cx("holiday-day")}> */}
           <span className={cx("holiday-day")}>NT.{info.holidayPrice}</span>
           <span>假日(五～日)</span>
+        </div>
+        <div className={cx("date-picker")}>
+          <DatePicker />
         </div>
       </div>
     </div>
