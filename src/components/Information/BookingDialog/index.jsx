@@ -24,17 +24,14 @@ BookingDialog.propTypes = {
 
 const DATE_TYPE = {
   START_DATE: "startDate",
-  END_DATE: "endDate"
-}
+  END_DATE: "endDate",
+};
 
-
-
-export default function BookingDialog({ open, setOpen, dateRange }) {
+export default function BookingDialog({ setOpen, dateRange }) {
   const [openCalendar, setOpenCalendar] = useState({
     open: false,
     type: DATE_TYPE.START_DATE,
   });
-
 
   const [dateValue, dispatch] = useReducer(reducer, {
     startDate: dateRange[0].startDate,
@@ -64,7 +61,7 @@ export default function BookingDialog({ open, setOpen, dateRange }) {
 
   return (
     <Dialog
-      open={open}
+      open={true}
       onClose={() => setOpen(false)}
       aria-labelledby="form-dialog-title"
       className="booking-dialog"
@@ -108,6 +105,19 @@ export default function BookingDialog({ open, setOpen, dateRange }) {
           />
         </div>
       </label>
+      <div className={cx("date-detail")}>
+        <div>
+          <span>平日時段</span>
+          <span>1夜</span>
+        </div>
+        <div>
+          <span>假日時段</span>
+          <span>1夜</span>
+        </div>
+      </div>
+      <div className={cx("total-price")}>
+        <span>NT.2850</span>
+      </div>
 
       <Dialog
         open={openCalendar.open}

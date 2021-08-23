@@ -4,14 +4,14 @@
   h2 {
     font-size: 24px;
     font-weight: 500;
-    padding: 5px 24px;
+    padding: 5px 42px;
 
   }
 }
 
 .divider {
   display: flex;
-  margin: 0 0 10px 20px;
+  padding: 0px 36px 10px 36px;
   div {
     height: 14px;
     width: 14px;
@@ -21,7 +21,7 @@
 }
 
 .booking-info {
-  padding: 10px 24px;
+  padding: 10px 42px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -34,12 +34,12 @@
   input {
     padding: 4px;
     font-size: 14px;
-    width: 243px;
+    width: 200px;
     border: 1px solid #c9c9c9;
     border-radius: 5px;
   }
   .time-btn {
-    width: 253px;
+    width: 210px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -54,7 +54,40 @@
       font-weight: 500;
       letter-spacing: 1px;
     }
+  }
+}
 
-    
+.date-detail{
+  width: 100%;
+  height: 69px;
+  background-color: #EDEDED ;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  div{
+    padding: 0 42px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    span{
+      padding: 4px 0px;
+      font-weight: 400;
+    }
+  }
+}
+
+.total-price{
+  width: 100%;
+  height: 69px;
+  display: flex;
+  justify-content: flex-end;
+  span{
+    margin: 10px 42px;
+    color: #FF5C5C ;
+    font-size: 26px;
+    font-weight: 500;
+
   }
 }

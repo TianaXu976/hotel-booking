@@ -45,7 +45,7 @@ export default function Information() {
 
       <div className={cx("room-info")}>
         <div className={cx("detail")}>
-          <span className={cx("name")}>{info.name}</span>
+          <h1 className={cx("name")}>{info.name}</h1>
           <div className={cx("description-short")}>
             房客人數限制：{info.descriptionShort["GuestMin"]} -
             {info.descriptionShort["GuestMax"]} 人<br />
