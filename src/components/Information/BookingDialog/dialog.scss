@@ -1,41 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&display=swap');
+
+.booking-dialog{
 .MuiPaper-root{
   width: 400px;
   padding: 10px;
 }
-
-.MuiDialogTitle-root{
-  h2{
-    font-size: 24px;
-  }
 }
 
+.calendar-dialog{
+  
+  .MuiBackdrop-root{
+    background: none;
+  }
 
-.MuiDialogContent-root {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  
-  .MuiDialogContentText-root {
-    color: #000000;
-    width: 35px;
-    font-size: 14px;
-    text-align: center;
-    margin: 0;
+  .MuiDialogActions-root{
+    padding: 0;
+
   }
-  
-  .MuiFormControl-root {
-    border: 1px solid #C9C9C9;
-    border-radius: 5px;
-    input{
-      padding: 4px;
-      font-size: 14px;
-      width: 243px;
-    }
-    .MuiInput-underline {
-      &:before,
-      &:after {
-        display: none;
-      }
-    }
-  }
+
+ 
+
 }
+
+// .MuiDialogTitle-root{
+//   h2{
+//     font-size: 24px;
+//     font-family: 'Noto Sans TC', sans-serif;
+//   }
+// }
+
+
+// .MuiDialogContent-root {
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+  
+//   .MuiDialogContentText-root {
+//     color: #000000;
+//     width: 35px;
+//     font-size: 14px;
+//     text-align: center;
+//     margin: 0;
+//   }
+  
+  // .MuiFormControl-root {
+  //   border: 1px solid #C9C9C9;
+  //   border-radius: 5px;
+  //   input{
+  //     padding: 4px;
+  //     font-size: 14px;
+  //     width: 243px;
+  //   }
+  //   .MuiInput-underline {
+  //     &:before,
+  //     &:after {
+  //       display: none;
+  //     }
+  //   }
+  // }
+// }

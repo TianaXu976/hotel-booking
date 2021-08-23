@@ -11,8 +11,8 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 
 const cx = classnames.bind(styles);
 
-export default function DatePicker() {
-  const [day, setDay] = useState([
+export default function DatePicker({bookingDialog, day}) {
+  const [date, setDate] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
@@ -20,7 +20,7 @@ export default function DatePicker() {
     },
   ]);
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,16 +28,16 @@ export default function DatePicker() {
 
 
   const handleChange = (item) => {
-    setDay([item.selection]);
-    console.log(item);
+    setDate([item.selection]);
   };
+
 
   return (
     <div className={cx("date-picker")}>
       <DateRange
         onChange={handleChange}
         moveRangeOnFirstSelection={false}
-        ranges={day}
+        ranges={date}
         scroll={{ enabled: true }}
         showDateDisplay={false}
         rangeColors={["#747474"]}
@@ -48,7 +48,9 @@ export default function DatePicker() {
         預約時段
       </button>
 
-      <BookingDialog open={open} setOpen={setOpen}/>
+      {open && <BookingDialog open={open} setOpen={setOpen} dateRange={date}/>}
+
+      
  
     </div>
   );
