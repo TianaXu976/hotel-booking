@@ -13,6 +13,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 
 import PropTypes from "prop-types";
 import CalendarDialog from "../CalendarDialog";
+import dayCalculate from "./dayCalculate";
 
 const cx = classnames.bind(styles);
 
@@ -27,7 +28,7 @@ const DATE_TYPE = {
   END_DATE: "endDate",
 };
 
-export default function BookingDialog({ setOpen, dateRange }) {
+export default function BookingDialog({ setOpen, dateRange, price }) {
   const [openCalendar, setOpenCalendar] = useState({
     open: false,
     type: DATE_TYPE.START_DATE,
@@ -58,6 +59,10 @@ export default function BookingDialog({ setOpen, dateRange }) {
     });
     setOpenCalendar({ ...openCalendar, open: false });
   };
+
+  const totalPrice =
+    dayCalculate(dateValue).normalDay * price.normalDay +
+    dayCalculate(dateValue).holiday * price.holiday;
 
   return (
     <Dialog
@@ -108,15 +113,15 @@ export default function BookingDialog({ setOpen, dateRange }) {
       <div className={cx("date-detail")}>
         <div>
           <span>平日時段</span>
-          <span>1夜</span>
+          <span>{dayCalculate(dateValue).normalDay}夜</span>
         </div>
         <div>
           <span>假日時段</span>
-          <span>1夜</span>
+          <span>{dayCalculate(dateValue).holiday}夜</span>
         </div>
       </div>
       <div className={cx("total-price")}>
-        <span>NT.2850</span>
+        <span>NT. {totalPrice}</span>
       </div>
 
       <Dialog

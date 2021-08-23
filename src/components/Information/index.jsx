@@ -85,7 +85,7 @@ export default function Information() {
           <span>假日(五～日)</span>
         </div>
   
-          <DatePicker />
+          <DatePicker price={{normalDay:info.normalDayPrice, holiday:info.holidayPrice}}/>
 
       </div>
     </div>
