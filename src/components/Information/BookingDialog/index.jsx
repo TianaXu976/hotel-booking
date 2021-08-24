@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useRef } from "react";
 import classnames from "classnames/bind";
 import styles from "./style.module.scss";
 import dayjs from "dayjs";
@@ -6,11 +6,11 @@ import dayjs from "dayjs";
 import "./dialog.scss";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
-// import TextField from "@material-ui/core/TextField";
+import TextField from "@material-ui/core/TextField";
 // import DialogContent from "@material-ui/core/DialogContent";
 // import DialogContentText from "@material-ui/core/DialogContentText";
 // import DialogTitle from "@material-ui/core/DialogTitle";
-
+import Popover from '@material-ui/core/Popover';
 import PropTypes from "prop-types";
 import CalendarDialog from "../CalendarDialog";
 import dayCalculate from "./dayCalculate";
@@ -29,6 +29,9 @@ const DATE_TYPE = {
 };
 
 export default function BookingDialog({ setOpen, dateRange, price }) {
+  const nameRef = useRef();
+  const [anchorEl, setAnchorEl] = useState(null);
+
   const [openCalendar, setOpenCalendar] = useState({
     open: false,
     type: DATE_TYPE.START_DATE,
@@ -42,7 +45,14 @@ export default function BookingDialog({ setOpen, dateRange, price }) {
   function reducer(dateValue, action) {
     switch (action.type) {
       case DATE_TYPE.START_DATE:
-        return { ...dateValue, startDate: action.payload };
+        if (dayjs(action.payload).diff(dateValue.endDate, "day") >= 0) {
+          return {
+            startDate: action.payload,
+            endDate: dayjs(action.payload).add(1, "day").toDate(),
+          };
+        } else {
+          return { ...dateValue, startDate: action.payload };
+        }
 
       case DATE_TYPE.END_DATE:
         return { ...dateValue, endDate: action.payload };
@@ -58,6 +68,11 @@ export default function BookingDialog({ setOpen, dateRange, price }) {
       payload: value,
     });
     setOpenCalendar({ ...openCalendar, open: false });
+  };
+
+
+  const handelConfirm = () => {
+    const nameValue = nameRef.current.value.trim();
   };
 
   const totalPrice =
@@ -82,21 +97,32 @@ export default function BookingDialog({ setOpen, dateRange, price }) {
       </div>
       <label className={cx("booking-info")}>
         <span>姓名</span>
-        <input type="text" id="name" />
+        <input type="text" id="name" required ref={nameRef} />
+        {/* <TextField
+          error
+          id="name"
+          // label="Error"
+          // defaultValue="Hello World"
+          // helperText= "此欄位必填"
+          variant="outlined" 
+          required={true}
+          inputRef={nameRef}
+        /> */}
       </label>
       <label className={cx("booking-info")}>
         <span>電話</span>
         <input type="text" id="phone" />
       </label>
-      <label className={cx("booking-info")}>
+      <label className={cx("booking-info")} >
         <span>預約起訖</span>
         <div className={cx("time-btn")}>
           <input
             type="button"
             id="startDate"
             defaultValue={dayjs(dateValue.startDate).format("YYYY/MM/DD")}
-            onClick={() => {
+            onClick={(e) => {
               setOpenCalendar({ open: true, type: DATE_TYPE.START_DATE });
+              setAnchorEl(e.currentTarget);
             }}
           />
           ~
@@ -104,8 +130,9 @@ export default function BookingDialog({ setOpen, dateRange, price }) {
             type="button"
             id="endDate"
             defaultValue={dayjs(dateValue.endDate).format("YYYY/MM/DD")}
-            onClick={() => {
+            onClick={(e) => {
               setOpenCalendar({ open: true, type: DATE_TYPE.END_DATE });
+              setAnchorEl(e.currentTarget);
             }}
           />
         </div>
@@ -123,22 +150,54 @@ export default function BookingDialog({ setOpen, dateRange, price }) {
       <div className={cx("total-price")}>
         <span>NT. {totalPrice}</span>
       </div>
+      <div className={cx("booking-btn")}>
+        <button className={cx("cancel")} onClick={() => setOpen(false)}>
+          取消
+        </button>
+        <button className={cx("confirm")} onClick={handelConfirm}>
+          確定預定
+        </button>
+      </div>
 
-      <Dialog
+      <Popover
+
+      anchorEl={anchorEl}
+        open={openCalendar.open}
+        onClose={() => setOpenCalendar({ ...openCalendar, open: false })}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        transitionDuration={100}
+  
+    
+ >
+   <CalendarDialog
+        dateValue={dateValue}
+        type={openCalendar.type}
+        onClickAction={onClickAction}
+      />
+
+      </Popover>
+
+    
+      {/* <Dialog
         open={openCalendar.open}
         onClose={() => setOpenCalendar({ ...openCalendar, open: false })}
         aria-labelledby="form-dialog-title"
         className="calendar-dialog"
         fullScreen={false}
       >
-        <DialogActions>
-          <CalendarDialog
-            dateValue={dateValue}
-            type={openCalendar.type}
-            onClickAction={onClickAction}
-          />
-        </DialogActions>
-      </Dialog>
+      <CalendarDialog
+        dateValue={dateValue}
+        type={openCalendar.type}
+        onClickAction={onClickAction}
+      />
+      </Dialog> */}
     </Dialog>
   );
 }

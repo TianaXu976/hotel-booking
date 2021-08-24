@@ -24,7 +24,7 @@ export default function Information() {
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [history.location.pathname]);
 
   if (!info) {
     return (

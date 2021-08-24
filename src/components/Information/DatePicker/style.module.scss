@@ -1,3 +1,5 @@
+@import '../../../styles/mixins';
+
 .date-picker{
   width: 350px;
   padding-left: 40px;
@@ -11,9 +13,7 @@
     margin-top: 40px;
     background-color: #575757;
     color: #FFFFFF;
-    border: none;
-    outline: none;
-    cursor: pointer;
+    @include btn-default;
     font-size: 16px;
   }
   
