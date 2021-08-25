@@ -1,20 +1,25 @@
 import dayjs from "dayjs";
 
-export default function dayCalculate(dateRange){
-  const dateArr = []
-  const startDay = dayjs(dateRange.startDate)
-  const endDay = dayjs(dateRange.endDate)
+export default function dayCalculate(dateRange) {
+  const nightsArr = [];
+  const dateData = [];
+  const startDay = dayjs(dateRange.startDate);
+  const endDay = dayjs(dateRange.endDate);
 
+  const days = endDay.diff(startDay, "day");
 
-  const days = endDay.diff(startDay, 'day') 
-  
-  for(var i = 0 ; i < days ; i++){
-    dateArr.push(startDay.add(i, 'day'))
+  for (let i = 0; i < days; i++) {
+    nightsArr.push(startDay.add(i, "day"));
   }
 
-  const normalDay = dateArr.filter((ele) => ele.day() >= 0 && ele.day() < 5).length;
-  const holiday = dateArr.length - normalDay;
+  for (let i = 0; i <= days; i++) {
+    dateData.push(startDay.add(i, "day").format("YYYY-MM-DD"));
+  }
 
-  return {normalDay, holiday}
-  
-};
+  const normalDay = nightsArr.filter(
+    (ele) => ele.day() >= 0 && ele.day() < 5
+  ).length;
+  const holiday = nightsArr.length - normalDay;
+
+  return { normalDay, holiday, dateData };
+}

@@ -10,7 +10,7 @@ import TextField from "@material-ui/core/TextField";
 // import DialogContent from "@material-ui/core/DialogContent";
 // import DialogContentText from "@material-ui/core/DialogContentText";
 // import DialogTitle from "@material-ui/core/DialogTitle";
-import Popover from '@material-ui/core/Popover';
+import Popover from "@material-ui/core/Popover";
 import PropTypes from "prop-types";
 import CalendarDialog from "../CalendarDialog";
 import dayCalculate from "./dayCalculate";
@@ -28,8 +28,47 @@ const DATE_TYPE = {
   END_DATE: "endDate",
 };
 
+function typeReducer(dateValue, action) {
+  switch (action.type) {
+    case DATE_TYPE.START_DATE:
+      if (dayjs(action.payload).isAfter(dateValue.endDate)) {
+        return {
+          startDate: action.payload,
+          endDate: dayjs(action.payload).add(1, "day").toDate(),
+        };
+      } else {
+        return { ...dateValue, startDate: action.payload };
+      }
+
+    case DATE_TYPE.END_DATE:
+      return { ...dateValue, endDate: action.payload };
+
+    default:
+      return dateValue;
+  }
+}
+
+// const ERROR_TYPE = {
+//   NAME: "nameError",
+//   PHONE: "phoneError",
+// };
+
+// function errorReducer(errorState, action) {
+//   switch (action.type) {
+//     case ERROR_TYPE.NAME:
+//       return { ...errorState, name: true };
+
+//     case ERROR_TYPE.PHONE:
+//       return { ...errorState, phone: true };
+
+//     default:
+//       return errorState;
+//   }
+// }
+
 export default function BookingDialog({ setOpen, dateRange, price }) {
   const nameRef = useRef();
+  const phoneRef = useRef();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const [openCalendar, setOpenCalendar] = useState({
@@ -37,42 +76,45 @@ export default function BookingDialog({ setOpen, dateRange, price }) {
     type: DATE_TYPE.START_DATE,
   });
 
-  const [dateValue, dispatch] = useReducer(reducer, {
+  const [dateValue, typeDispatch] = useReducer(typeReducer, {
     startDate: dateRange[0].startDate,
     endDate: dateRange[0].endDate,
   });
 
-  function reducer(dateValue, action) {
-    switch (action.type) {
-      case DATE_TYPE.START_DATE:
-        if (dayjs(action.payload).diff(dateValue.endDate, "day") >= 0) {
-          return {
-            startDate: action.payload,
-            endDate: dayjs(action.payload).add(1, "day").toDate(),
-          };
-        } else {
-          return { ...dateValue, startDate: action.payload };
-        }
+  const [errorState, setErrorState] = useState({
+    name: false,
+    tel: false,
+  });
 
-      case DATE_TYPE.END_DATE:
-        return { ...dateValue, endDate: action.payload };
-
-      default:
-        return dateValue;
-    }
-  }
+  // const [errorState, errorDispatch] = useReducer(errorReducer, {
+  //   name: false,
+  //   phone: false,
+  // });
 
   const onClickAction = (type, value) => {
-    dispatch({
+    typeDispatch({
       type,
       payload: value,
     });
     setOpenCalendar({ ...openCalendar, open: false });
   };
 
-
   const handelConfirm = () => {
-    const nameValue = nameRef.current.value.trim();
+    const name = nameRef.current.value.trim();
+    const tel = phoneRef.current.value.trim();
+
+    if (!name || !tel) {
+      setErrorState({ name: Boolean(!name), tel: Boolean(!tel) });
+      return;
+    }
+
+    const bookingData = {
+      name,
+      tel,
+      date: dayCalculate(dateValue).dateData,
+    }
+
+    console.log(bookingData)
   };
 
   const totalPrice =
@@ -86,7 +128,6 @@ export default function BookingDialog({ setOpen, dateRange, price }) {
       aria-labelledby="form-dialog-title"
       className="booking-dialog"
     >
-      {/* <DialogTitle id="form-dialog-title" >預約時段</DialogTitle> */}
       <div className={cx("title")}>
         <h2>預約時段</h2>
       </div>
@@ -97,23 +138,25 @@ export default function BookingDialog({ setOpen, dateRange, price }) {
       </div>
       <label className={cx("booking-info")}>
         <span>姓名</span>
-        <input type="text" id="name" required ref={nameRef} />
-        {/* <TextField
-          error
+        <input
+          className={cx({ error: errorState.name })}
+          type="text"
           id="name"
-          // label="Error"
-          // defaultValue="Hello World"
-          // helperText= "此欄位必填"
-          variant="outlined" 
-          required={true}
-          inputRef={nameRef}
-        /> */}
+          ref={nameRef}
+          onChange={() => setErrorState({...errorState, name: false})}
+        />
       </label>
       <label className={cx("booking-info")}>
         <span>電話</span>
-        <input type="text" id="phone" />
+        <input
+          className={cx({ error: errorState.tel })}
+          type="text"
+          id="phone"
+          ref={phoneRef}
+          onChange={() => setErrorState({...errorState, tel: false})}
+        />
       </label>
-      <label className={cx("booking-info")} >
+      <label className={cx("booking-info")}>
         <span>預約起訖</span>
         <div className={cx("time-btn")}>
           <input
@@ -160,44 +203,26 @@ export default function BookingDialog({ setOpen, dateRange, price }) {
       </div>
 
       <Popover
-
-      anchorEl={anchorEl}
+        anchorEl={anchorEl}
         open={openCalendar.open}
         onClose={() => setOpenCalendar({ ...openCalendar, open: false })}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
+          vertical: "bottom",
+          horizontal: "left",
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
+          vertical: "top",
+          horizontal: "left",
         }}
         transitionDuration={100}
-  
-    
- >
-   <CalendarDialog
-        dateValue={dateValue}
-        type={openCalendar.type}
-        onClickAction={onClickAction}
-      />
-
+      >
+        <CalendarDialog
+          dateValue={dateValue}
+          type={openCalendar.type}
+          onClickAction={onClickAction}
+        />
       </Popover>
 
-    
-      {/* <Dialog
-        open={openCalendar.open}
-        onClose={() => setOpenCalendar({ ...openCalendar, open: false })}
-        aria-labelledby="form-dialog-title"
-        className="calendar-dialog"
-        fullScreen={false}
-      >
-      <CalendarDialog
-        dateValue={dateValue}
-        type={openCalendar.type}
-        onClickAction={onClickAction}
-      />
-      </Dialog> */}
     </Dialog>
   );
 }

@@ -1,0 +1,11 @@
+.rdrDayNumber{
+  font-weight: 400;
+}
+
+.rdrDayDisabled {
+  background-color: none;
+  span{
+    text-decoration: line-through;
+  }
+
+}
