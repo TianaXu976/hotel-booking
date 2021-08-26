@@ -1,0 +1,37 @@
+@import '../../../styles/mixins';
+
+.title {
+  width: 423px;
+  h2 {
+    font-size: 24px;
+    font-weight: 500;
+    padding: 5px 42px;
+  }
+}
+
+.divider {
+  display: flex;
+  padding: 0px 36px 10px 36px;
+  div {
+    height: 14px;
+    width: 14px;
+    border-top: 1px solid #000000;
+    transform: rotate(45deg);
+  }
+}
+
+.tick{
+  width: 60px;
+  height: 60px;
+  margin: auto;
+}
+
+.back-btn{
+  @include btn-default;
+  background-color: #484848;
+  color: #FFFFFF;
+  width: 85px;
+  height: 37px;
+  margin: 32px 43px 32px auto;
+
+}

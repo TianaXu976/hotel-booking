@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useRef } from "react";
+import React, { useState, useReducer, useRef, useContext } from "react";
 import classnames from "classnames/bind";
 import styles from "./style.module.scss";
 import dayjs from "dayjs";
@@ -12,18 +12,21 @@ import TextField from "@material-ui/core/TextField";
 // import DialogTitle from "@material-ui/core/DialogTitle";
 import Popover from "@material-ui/core/Popover";
 import PropTypes from "prop-types";
-import CalendarDialog from "../CalendarDialog";
+import CalendarDialog from "./CalendarDialog";
 import dayCalculate from "./dayCalculate";
+
+import { DialogContext, DIALOG } from "../../../context/dialog";
 
 const cx = classnames.bind(styles);
 
-BookingDialog.propTypes = {
-  open: PropTypes.bool,
-  setOpen: PropTypes.func,
-  date: PropTypes.any,
-};
+// BookingDialog.propTypes = {
+//   open: PropTypes.bool,
+//   setOpen: PropTypes.func,
+//   date: PropTypes.any,
+// };
 
 const DATE_TYPE = {
+  INITIAL_DATE: "initialDate",
   START_DATE: "startDate",
   END_DATE: "endDate",
 };
@@ -31,7 +34,7 @@ const DATE_TYPE = {
 function typeReducer(dateValue, action) {
   switch (action.type) {
     case DATE_TYPE.START_DATE:
-      if (dayjs(action.payload).isAfter(dateValue.endDate)) {
+      if (dayjs(action.payload).diff(dateValue.endDate, "day") > -1) {
         return {
           startDate: action.payload,
           endDate: dayjs(action.payload).add(1, "day").toDate(),
@@ -48,25 +51,10 @@ function typeReducer(dateValue, action) {
   }
 }
 
-// const ERROR_TYPE = {
-//   NAME: "nameError",
-//   PHONE: "phoneError",
-// };
+export default function BookingDialog() {
+  const { dialogState, dialogDispatch } = useContext(DialogContext);
+  const { dateRange, price } = dialogState.info;
 
-// function errorReducer(errorState, action) {
-//   switch (action.type) {
-//     case ERROR_TYPE.NAME:
-//       return { ...errorState, name: true };
-
-//     case ERROR_TYPE.PHONE:
-//       return { ...errorState, phone: true };
-
-//     default:
-//       return errorState;
-//   }
-// }
-
-export default function BookingDialog({ setOpen, dateRange, price }) {
   const nameRef = useRef();
   const phoneRef = useRef();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -77,19 +65,17 @@ export default function BookingDialog({ setOpen, dateRange, price }) {
   });
 
   const [dateValue, typeDispatch] = useReducer(typeReducer, {
-    startDate: dateRange[0].startDate,
-    endDate: dateRange[0].endDate,
+    startDate: dateRange.startDate,
+    endDate:
+      dayjs(dateRange.startDate).diff(dateRange.endDate) === 0
+        ? dayjs(dateRange.startDate).add(1, "day").toDate()
+        : dateRange.endDate,
   });
 
   const [errorState, setErrorState] = useState({
     name: false,
     tel: false,
   });
-
-  // const [errorState, errorDispatch] = useReducer(errorReducer, {
-  //   name: false,
-  //   phone: false,
-  // });
 
   const onClickAction = (type, value) => {
     typeDispatch({
@@ -112,9 +98,7 @@ export default function BookingDialog({ setOpen, dateRange, price }) {
       name,
       tel,
       date: dayCalculate(dateValue).dateData,
-    }
-
-    console.log(bookingData)
+    };
   };
 
   const totalPrice =
@@ -124,7 +108,7 @@ export default function BookingDialog({ setOpen, dateRange, price }) {
   return (
     <Dialog
       open={true}
-      onClose={() => setOpen(false)}
+      onClose={() => dialogDispatch({ type: DIALOG.CLOSE })}
       aria-labelledby="form-dialog-title"
       className="booking-dialog"
     >
@@ -143,7 +127,7 @@ export default function BookingDialog({ setOpen, dateRange, price }) {
           type="text"
           id="name"
           ref={nameRef}
-          onChange={() => setErrorState({...errorState, name: false})}
+          onChange={() => setErrorState({ ...errorState, name: false })}
         />
       </label>
       <label className={cx("booking-info")}>
@@ -153,7 +137,7 @@ export default function BookingDialog({ setOpen, dateRange, price }) {
           type="text"
           id="phone"
           ref={phoneRef}
-          onChange={() => setErrorState({...errorState, tel: false})}
+          onChange={() => setErrorState({ ...errorState, tel: false })}
         />
       </label>
       <label className={cx("booking-info")}>
@@ -194,7 +178,10 @@ export default function BookingDialog({ setOpen, dateRange, price }) {
         <span>NT. {totalPrice}</span>
       </div>
       <div className={cx("booking-btn")}>
-        <button className={cx("cancel")} onClick={() => setOpen(false)}>
+        <button
+          className={cx("cancel")}
+          onClick={() => dialogDispatch({ type: DIALOG.CLOSE })}
+        >
           取消
         </button>
         <button className={cx("confirm")} onClick={handelConfirm}>
@@ -222,7 +209,6 @@ export default function BookingDialog({ setOpen, dateRange, price }) {
           onClickAction={onClickAction}
         />
       </Popover>
-
     </Dialog>
   );
 }

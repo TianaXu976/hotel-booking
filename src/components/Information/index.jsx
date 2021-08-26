@@ -9,6 +9,8 @@ import Slider from "./Slider";
 import DatePicker from "./DatePicker";
 import { useHistory } from "react-router-dom";
 
+import SuccessDialog from "../Dialog/SuccessDialog";
+
 const cx = classnames.bind(styles);
 
 export default function Information() {
@@ -76,14 +78,13 @@ export default function Information() {
           <Amenity amenitiesState={info.amenities} />
         </div>
         <div className={cx("room-price")}>
-          {/* <div className={cx("normal-day")}> */}
           <span className={cx("normal-day")}>NT.{info.normalDayPrice}</span>
           <span>平日(一～四)</span>
 
-          {/* <div className={cx("holiday-day")}> */}
           <span className={cx("holiday-day")}>NT.{info.holidayPrice}</span>
           <span>假日(五～日)</span>
         </div>
+
   
           <DatePicker price={{normalDay:info.normalDayPrice, holiday:info.holidayPrice}}/>
 
