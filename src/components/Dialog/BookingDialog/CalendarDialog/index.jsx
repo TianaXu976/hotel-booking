@@ -6,16 +6,14 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { addDays } from "date-fns";
 import "./calendar.scss"
 
-export default function CalendarDialog({ dateValue, type, onClickAction }) {
+export default function CalendarDialog({ dateValue, type, onClickAction, bookingRange }) {
   const handleChange = (item) => {
     onClickAction(type, item);
   };
 
-  
-
 
   const disableDay =
-    type === "endDate" ? addDays(dateValue.startDate, 1) : addDays(new Date(), 0);
+    type === "endDate" ? addDays(dateValue.startDate, 1) : addDays(new Date(), 1);
 
 
   return (
@@ -27,6 +25,7 @@ export default function CalendarDialog({ dateValue, type, onClickAction }) {
       showMonthAndYearPickers={false}
       date={dateValue[type]}
       minDate={disableDay}
+      disabledDates={bookingRange}
 
     />
   );

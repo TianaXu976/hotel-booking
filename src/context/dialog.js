@@ -10,7 +10,9 @@ const initState = {
 
 export const DIALOG = {
   BOOKING: "BookingDialog",
-  CLOSE: "CloseDialog"
+  SUCCESS: "SuccessDialog",
+  ERROR: "ErrorDialog",
+  CLOSE: "CloseDialog",
 };
 
 function reducer(dialogState, action) {
@@ -21,12 +23,25 @@ function reducer(dialogState, action) {
         dialogName: DIALOG.BOOKING,
         info: action.payload,
       };
+    case DIALOG.SUCCESS:
+      return {
+        state: true,
+        dialogName: DIALOG.SUCCESS,
+        info: null,
+      };
 
-      case DIALOG.CLOSE:
+      case DIALOG.ERROR:
         return {
-          ...dialogState,
-          state: false,
+          state: true,
+          dialogName: DIALOG.ERROR,
+          info: action.payload,
         };
+
+    case DIALOG.CLOSE:
+      return {
+        ...dialogState,
+        state: false,
+      };
 
     default:
       return dialogState;

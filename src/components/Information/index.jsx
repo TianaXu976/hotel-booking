@@ -9,32 +9,35 @@ import Slider from "./Slider";
 import DatePicker from "./DatePicker";
 import { useHistory } from "react-router-dom";
 
-import SuccessDialog from "../Dialog/SuccessDialog";
-
 const cx = classnames.bind(styles);
 
 export default function Information() {
-  const [info, setInfo] = useState();
+  
+
+  const [data, setData] = useState();
+ 
+
+  
 
   const history = useHistory();
 
   useEffect(() => {
-    try {
-      getInfomation(history.location.pathname).then((response) =>
-        setInfo(response.data.room[0])
-      );
-    } catch (error) {
-      console.error(error);
-    }
+    getInfomation(history.location.pathname)
+      .then((response) => setData(response.data))
+      .catch((error) => console.error(error));
   }, [history.location.pathname]);
 
-  if (!info) {
+  if (!data) {
     return (
       <div className={cx("loading")}>
         <Loading />
       </div>
     );
   }
+
+  const info = data.room[0];
+  const bookingDate = data.booking;
+
 
   return (
     <div className={cx("container")}>
@@ -84,10 +87,13 @@ export default function Information() {
           <span className={cx("holiday-day")}>NT.{info.holidayPrice}</span>
           <span>假日(五～日)</span>
         </div>
+        
 
-  
-          <DatePicker price={{normalDay:info.normalDayPrice, holiday:info.holidayPrice}}/>
-
+        <DatePicker
+          price={{ normalDay: info.normalDayPrice, holiday: info.holidayPrice }}
+          roomId={info.id}
+          bookingDate={bookingDate}
+        />
       </div>
     </div>
   );

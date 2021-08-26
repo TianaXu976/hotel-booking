@@ -4,12 +4,11 @@ import styles from "./style.module.scss";
 import { DialogContext, DIALOG } from "../../../context/dialog";
 
 import Dialog from "@material-ui/core/Dialog";
-import { ReactComponent as Tick } from "../../../img/tick-inside-circle.svg";
 
 const cx = classnames.bind(styles);
 
-export default function SuccessDialog() {
-  const { dialogDispatch } = useContext(DialogContext);
+export default function ErrorDialog() {
+  const { dialogState, dialogDispatch } = useContext(DialogContext);
   return (
     <Dialog
       open={true}
@@ -19,17 +18,19 @@ export default function SuccessDialog() {
         })
       }
       aria-labelledby="form-dialog-title"
-      className="success-dialog"
+      className="error-dialog"
     >
       <div className={cx("title")}>
-        <h2>預約成功</h2>
+        <h2>預約失敗</h2>
       </div>
       <div className={cx("divider")}>
         <div />
         <div />
         <div />
       </div>
-      <Tick className={cx("tick")} />
+      <div className={cx("message")}>
+        {dialogState.info}
+      </div>
       <button
         className={cx("back-btn")}
         onClick={() =>
@@ -38,7 +39,7 @@ export default function SuccessDialog() {
           })
         }
       >
-        回頁面
+        返回
       </button>
     </Dialog>
   );

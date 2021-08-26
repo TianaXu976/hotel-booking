@@ -6,11 +6,19 @@
 
 
 .rdrDayToday .rdrDayNumber span {
-  font-weight: 600;
+  color:  #aeb9bf !important;
   &:after {
     display: none;
   }
 }
+
+
+.rdrDayToday .rdrStartEdge {
+  background: none;
+
+}
+
+
  
 
 

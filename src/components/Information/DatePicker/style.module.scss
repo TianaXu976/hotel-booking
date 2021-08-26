@@ -15,6 +15,10 @@
     color: #FFFFFF;
     @include btn-default;
     font-size: 16px;
+
+    &.disabled{
+      background-color: #5757579d;
+    }
   }
   
 }

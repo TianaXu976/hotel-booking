@@ -5,15 +5,13 @@ import dayjs from "dayjs";
 
 import "./dialog.scss";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import TextField from "@material-ui/core/TextField";
-// import DialogContent from "@material-ui/core/DialogContent";
-// import DialogContentText from "@material-ui/core/DialogContentText";
-// import DialogTitle from "@material-ui/core/DialogTitle";
 import Popover from "@material-ui/core/Popover";
 import PropTypes from "prop-types";
 import CalendarDialog from "./CalendarDialog";
 import dayCalculate from "./dayCalculate";
+import { bookingRoom } from "../../../api";
+import Loading from "../../Loading";
+import Modal from "@material-ui/core/Modal";
 
 import { DialogContext, DIALOG } from "../../../context/dialog";
 
@@ -53,12 +51,13 @@ function typeReducer(dateValue, action) {
 
 export default function BookingDialog() {
   const { dialogState, dialogDispatch } = useContext(DialogContext);
-  const { dateRange, price } = dialogState.info;
+  const { dateRange, price, roomId, bookingRange } = dialogState.info;
 
   const nameRef = useRef();
   const phoneRef = useRef();
   const [anchorEl, setAnchorEl] = useState(null);
 
+  const [loading, setLoading] = useState(false);
   const [openCalendar, setOpenCalendar] = useState({
     open: false,
     type: DATE_TYPE.START_DATE,
@@ -99,11 +98,34 @@ export default function BookingDialog() {
       tel,
       date: dayCalculate(dateValue).dateData,
     };
+
+    setLoading(true);
+
+    bookingRoom(roomId, bookingData)
+      .then((response) => {
+        dialogDispatch({
+          type: DIALOG.SUCCESS,
+        });
+      })
+      .catch((error) =>
+        dialogDispatch({
+          type: DIALOG.ERROR,
+          payload: error.response.data.message,
+        })
+      );
   };
 
   const totalPrice =
     dayCalculate(dateValue).normalDay * price.normalDay +
     dayCalculate(dateValue).holiday * price.holiday;
+
+  if (loading) {
+    return (
+      <Modal open={true} className="loading">
+        <Loading />
+      </Modal>
+    );
+  }
 
   return (
     <Dialog
@@ -207,6 +229,7 @@ export default function BookingDialog() {
           dateValue={dateValue}
           type={openCalendar.type}
           onClickAction={onClickAction}
+          bookingRange={bookingRange}
         />
       </Popover>
     </Dialog>

@@ -11,4 +11,5 @@ const roomRequest = axios.create({
 })
 
 export const getRooms = () => roomRequest.get('/rooms');
-export const getInfomation = (data) => roomRequest.get(`/room${data}`);
+export const getInfomation = (id) => roomRequest.get(`/room${id}`);
+export const bookingRoom = (id, data) => roomRequest.post(`/room/${id}`, data);

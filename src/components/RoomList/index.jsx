@@ -27,11 +27,9 @@ export default function RoomList() {
   }, []);
 
   useEffect(() => {
-    try {
-      getRooms().then((response) => setRoomList(response.data.items));
-    } catch (error) {
-      console.error(error);
-    }
+    getRooms()
+      .then((response) => setRoomList(response.data.items))
+      .catch((error) => console.error(error));
   }, []);
 
   return (
@@ -45,13 +43,10 @@ export default function RoomList() {
         <Logo className={cx("logo")} />
         <Contact />
       </div>
-      {roomList.length > 0 ? 
-      (
+      {roomList.length > 0 ? (
         <div className={cx("room-cards")}>
           {roomList.map((item) => (
-            
-              <RoomCard key={item.id} info={item} />
-            
+            <RoomCard key={item.id} info={item} />
           ))}
         </div>
       ) : (
