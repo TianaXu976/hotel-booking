@@ -13,11 +13,12 @@ export default function SuccessDialog() {
   return (
     <Dialog
       open={true}
-      onClose={() =>
+      onClose={() => {
         dialogDispatch({
           type: DIALOG.CLOSE,
-        })
-      }
+        });
+        window.location.reload();
+      }}
       aria-labelledby="form-dialog-title"
       className="success-dialog"
     >
@@ -32,11 +33,12 @@ export default function SuccessDialog() {
       <Tick className={cx("tick")} />
       <button
         className={cx("back-btn")}
-        onClick={() =>
+        onClick={() => {
           dialogDispatch({
             type: DIALOG.CLOSE,
-          })
-        }
+          });
+          window.location.reload();
+        }}
       >
         回頁面
       </button>

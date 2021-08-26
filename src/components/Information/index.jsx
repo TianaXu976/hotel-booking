@@ -12,12 +12,7 @@ import { useHistory } from "react-router-dom";
 const cx = classnames.bind(styles);
 
 export default function Information() {
-  
-
   const [data, setData] = useState();
- 
-
-  
 
   const history = useHistory();
 
@@ -37,7 +32,6 @@ export default function Information() {
 
   const info = data.room[0];
   const bookingDate = data.booking;
-
 
   return (
     <div className={cx("container")}>
@@ -83,11 +77,9 @@ export default function Information() {
         <div className={cx("room-price")}>
           <span className={cx("normal-day")}>NT.{info.normalDayPrice}</span>
           <span>平日(一～四)</span>
-
           <span className={cx("holiday-day")}>NT.{info.holidayPrice}</span>
           <span>假日(五～日)</span>
         </div>
-        
 
         <DatePicker
           price={{ normalDay: info.normalDayPrice, holiday: info.holidayPrice }}

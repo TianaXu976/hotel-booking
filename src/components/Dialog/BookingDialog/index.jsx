@@ -101,6 +101,7 @@ export default function BookingDialog() {
 
     setLoading(true);
 
+
     bookingRoom(roomId, bookingData)
       .then((response) => {
         dialogDispatch({
