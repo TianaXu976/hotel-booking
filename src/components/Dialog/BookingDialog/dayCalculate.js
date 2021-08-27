@@ -21,5 +21,6 @@ export default function dayCalculate(dateRange) {
   ).length;
   const holiday = nightsArr.length - normalDay;
 
+
   return { normalDay, holiday, dateData };
 }

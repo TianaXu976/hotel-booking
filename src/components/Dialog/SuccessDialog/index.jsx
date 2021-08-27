@@ -1,10 +1,15 @@
 import React, { useContext } from "react";
 import classnames from "classnames/bind";
 import styles from "./style.module.scss";
+
+// components
+import { ReactComponent as Tick } from "../../../img/tick-inside-circle.svg";
+
+// context
 import { DialogContext, DIALOG } from "../../../context/dialog";
 
+//lib
 import Dialog from "@material-ui/core/Dialog";
-import { ReactComponent as Tick } from "../../../img/tick-inside-circle.svg";
 
 const cx = classnames.bind(styles);
 

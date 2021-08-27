@@ -1,20 +1,31 @@
 import React, { useState, useContext } from "react";
 import classnames from "classnames/bind";
 import styles from "./style.module.scss";
+import PropTypes from "prop-types";
 
+// lib
 import dayjs from "dayjs";
 import { addDays } from "date-fns";
-import "./date-range.scss";
 import { DateRange } from "react-date-range";
+import "./date-range.scss";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
+// context
 import { DialogContext, DIALOG } from "../../../context/dialog";
 
 const cx = classnames.bind(styles);
 
+DatePicker.propTypes = {
+  price: PropTypes.object,
+  roomId: PropTypes.string,
+  bookingDate: PropTypes.array,
+};
+
 export default function DatePicker({ price, roomId, bookingDate }) {
-  const [ btnState , setBtnState] = useState(true)
+  const { dialogDispatch } = useContext(DialogContext);
+  
+  const [btnState, setBtnState] = useState(true);
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -23,7 +34,6 @@ export default function DatePicker({ price, roomId, bookingDate }) {
     },
   ]);
 
-  const { dialogDispatch } = useContext(DialogContext);
 
   const dateRange = {
     startDate: date[0].startDate,
@@ -35,7 +45,6 @@ export default function DatePicker({ price, roomId, bookingDate }) {
       type: DIALOG.BOOKING,
       payload: { dateRange, price, roomId, bookingRange },
     });
-   
   };
 
   const handleChange = (item) => {
@@ -43,15 +52,14 @@ export default function DatePicker({ price, roomId, bookingDate }) {
     setBtnState(false);
   };
 
-  const bookingRange = bookingDate.map((element) => (dayjs(element.date).toDate()));
-  // console.log(bookingRange)
-  
+  const bookingRange = bookingDate.map((element) =>
+    dayjs(element.date).toDate()
+  );
 
   return (
     <div className={cx("date-picker")}>
       <DateRange
         onChange={handleChange}
-        // moveRangeOnFirstSelection={false}
         ranges={date}
         scroll={{ enabled: true }}
         showDateDisplay={false}
@@ -59,10 +67,13 @@ export default function DatePicker({ price, roomId, bookingDate }) {
         showMonthAndYearPickers={false}
         minDate={addDays(new Date(), 1)}
         disabledDates={bookingRange}
-
       />
 
-      <button className={cx("booking-btn",{disabled: btnState})} onClick={handleClickOpen} disabled={btnState}>
+      <button
+        className={cx("booking-btn", { disabled: btnState })}
+        onClick={handleClickOpen}
+        disabled={btnState}
+      >
         預約時段
       </button>
     </div>

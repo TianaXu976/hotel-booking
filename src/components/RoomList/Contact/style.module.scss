@@ -1,6 +1,7 @@
+@import "../../../styles/mixins";
+
 .contact{
-    display: flex;
-    align-items: center;
+    @include flex-center;
 
     .fanpage{
         padding: 0 35px 0 20px;
@@ -8,7 +9,6 @@
             width: 25px;
             margin-left: 11px;
         }
-
     }
     .contact-wrap{
         padding-left: 27px;

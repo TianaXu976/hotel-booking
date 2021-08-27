@@ -1,16 +1,14 @@
+@import "../../styles/mixins";
 
 .container{
     position: relative;
 }
 
 .banner{
+    @include flex-column;
     height: 660px;
     background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15));
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     transition: background-image 2s ;
-  
     .logo{
         margin: 155px 0 47px 0;
     }
@@ -18,8 +16,7 @@
 
 .room-cards{
     max-width: 944px;
-    display: flex;
-    justify-content: space-between;
+    @include flex-between;
     flex-wrap: wrap;
     padding: 0 20px;
     position: absolute;

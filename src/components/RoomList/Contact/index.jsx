@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames/bind';
 import styles from './style.module.scss';
 
-
+// components
 import { ReactComponent as Ig } from '../../../img/instagram-brands.svg';
 import { ReactComponent as Fb } from '../../../img/facebook-square-brands.svg';
 import { ReactComponent as Phone } from '../../../img/phone-alt-solid.svg';

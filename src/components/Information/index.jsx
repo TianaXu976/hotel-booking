@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from "react";
 import classnames from "classnames/bind";
 import styles from "./style.module.scss";
+
+// api
 import { getInfomation } from "../../api";
+
+// components
 import { ReactComponent as Logo } from "../../img/logo_block.svg";
 import Amenity from "./Amenity";
-import Loading from "../Loading";
+import Loading from "../base/Loading";
 import Slider from "./Slider";
 import DatePicker from "./DatePicker";
+
+// router
 import { useHistory } from "react-router-dom";
 
 const cx = classnames.bind(styles);

@@ -1,8 +1,11 @@
 import React, { useContext } from "react";
 import classnames from "classnames/bind";
 import styles from "./style.module.scss";
+
+// context
 import { DialogContext, DIALOG } from "../../../context/dialog";
 
+// lib
 import Dialog from "@material-ui/core/Dialog";
 
 const cx = classnames.bind(styles);
@@ -28,9 +31,7 @@ export default function ErrorDialog() {
         <div />
         <div />
       </div>
-      <div className={cx("message")}>
-        {dialogState.info}
-      </div>
+      <div className={cx("message")}>{dialogState.info}</div>
       <button
         className={cx("back-btn")}
         onClick={() =>

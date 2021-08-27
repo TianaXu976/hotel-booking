@@ -1,16 +1,20 @@
 import { useContext } from "react";
+import "./styles/main.scss";
+
+//components
 import Home from "./views/Home";
 import Room from "./views/Room";
-import "./styles/main.scss";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import {DialogContext} from "./context/dialog"
 import Dialog from "./components/Dialog";
 
+// context
+import { DialogContext } from "./context/dialog";
 
+// router
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 
 function App() {
-  const { dialogState } = useContext(DialogContext)
+  const { dialogState } = useContext(DialogContext);
 
   return (
     <div className="App">
@@ -20,9 +24,7 @@ function App() {
           <Route path="/:id" component={Room} />
         </Switch>
       </Router>
-      {dialogState.state && (
-        <Dialog dialogState={dialogState} />
-      )}
+      {dialogState.state && <Dialog dialogState={dialogState} />}
     </div>
   );
 }

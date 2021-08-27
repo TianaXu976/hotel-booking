@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import classnames from "classnames/bind";
 import styles from "./style.module.scss";
+
+// api
 import { getRooms } from "../../api";
 
-import Loading from "../Loading";
-
+// components
+import Loading from "../base/Loading";
 import { ReactComponent as Logo } from "../../img/logo_white.svg";
 import Contact from "./Contact";
 import RoomCard from "./RoomCard";
+
 
 const cx = classnames.bind(styles);
 const bannerList = ["room_4-2", "room_5-1", "room_5-3"];

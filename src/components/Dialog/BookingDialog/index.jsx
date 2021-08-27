@@ -1,27 +1,42 @@
-import React, { useState, useReducer, useRef, useContext } from "react";
+import React, {
+  useState,
+  useReducer,
+  useRef,
+  useContext,
+  useMemo,
+} from "react";
 import classnames from "classnames/bind";
 import styles from "./style.module.scss";
-import dayjs from "dayjs";
-
-import "./dialog.scss";
-import Dialog from "@material-ui/core/Dialog";
-import Popover from "@material-ui/core/Popover";
 import PropTypes from "prop-types";
-import CalendarDialog from "./CalendarDialog";
-import dayCalculate from "./dayCalculate";
-import { bookingRoom } from "../../../api";
-import Loading from "../../Loading";
+
+// lib
+import dayjs from "dayjs";
+import "./dialog.scss";
+import Popover from "@material-ui/core/Popover";
+import Dialog from "@material-ui/core/Dialog";
 import Modal from "@material-ui/core/Modal";
 
+// components
+import CalendarDialog from "./CalendarDialog";
+import Loading from "../../Loading";
+
+// utils
+import dayCalculate from "./dayCalculate";
+
+// api
+import { bookingRoom } from "../../../api";
+
+// context
 import { DialogContext, DIALOG } from "../../../context/dialog";
 
 const cx = classnames.bind(styles);
 
-// BookingDialog.propTypes = {
-//   open: PropTypes.bool,
-//   setOpen: PropTypes.func,
-//   date: PropTypes.any,
-// };
+BookingDialog.propTypes = {
+  dateRange: PropTypes.object,
+  price: PropTypes.object,
+  roomId: PropTypes.string,
+  bookingRange: PropTypes.array,
+};
 
 const DATE_TYPE = {
   INITIAL_DATE: "initialDate",
@@ -55,9 +70,11 @@ export default function BookingDialog() {
 
   const nameRef = useRef();
   const phoneRef = useRef();
+
   const [anchorEl, setAnchorEl] = useState(null);
 
   const [loading, setLoading] = useState(false);
+
   const [openCalendar, setOpenCalendar] = useState({
     open: false,
     type: DATE_TYPE.START_DATE,
@@ -71,6 +88,10 @@ export default function BookingDialog() {
         : dateRange.endDate,
   });
 
+  const days = useMemo(() => {
+    return dayCalculate(dateValue);
+  }, [dateValue]);
+
   const [errorState, setErrorState] = useState({
     name: false,
     tel: false,
@@ -83,6 +104,9 @@ export default function BookingDialog() {
     });
     setOpenCalendar({ ...openCalendar, open: false });
   };
+
+  const totalPrice =
+    days.normalDay * price.normalDay + days.holiday * price.holiday;
 
   const handelConfirm = () => {
     const name = nameRef.current.value.trim();
@@ -101,7 +125,6 @@ export default function BookingDialog() {
 
     setLoading(true);
 
-
     bookingRoom(roomId, bookingData)
       .then((response) => {
         dialogDispatch({
@@ -116,14 +139,14 @@ export default function BookingDialog() {
       );
   };
 
-  const totalPrice =
-    dayCalculate(dateValue).normalDay * price.normalDay +
-    dayCalculate(dateValue).holiday * price.holiday;
+  
 
   if (loading) {
     return (
       <Modal open={true} className="loading">
-        <Loading />
+        <div>
+          <Loading />
+        </div>
       </Modal>
     );
   }
@@ -190,11 +213,11 @@ export default function BookingDialog() {
       <div className={cx("date-detail")}>
         <div>
           <span>平日時段</span>
-          <span>{dayCalculate(dateValue).normalDay}夜</span>
+          <span>{days.normalDay}夜</span>
         </div>
         <div>
           <span>假日時段</span>
-          <span>{dayCalculate(dateValue).holiday}夜</span>
+          <span>{days.holiday}夜</span>
         </div>
       </div>
       <div className={cx("total-price")}>

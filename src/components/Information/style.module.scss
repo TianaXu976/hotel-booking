@@ -1,97 +1,93 @@
-@import '../../styles/mixins';
+@import "../../styles/mixins";
 
-.loading{
+.loading {
   text-align: center;
   margin-top: 30%;
 }
 
-.room-photo{
+.room-photo {
   height: 596px;
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
   position: relative;
 
-  .logo{
+  .logo {
     position: absolute;
     top: 32px;
     left: 50px;
     z-index: 1;
-    &:hover{cursor: pointer;}
+    &:hover {
+      cursor: pointer;
+    }
   }
-
 }
 
-.room-info{
+.room-info {
   max-width: 1200px;
   margin: auto;
   padding: 47px 40px;
   display: flex;
   justify-content: center;
 
-
-  .detail{
+  .detail {
     max-width: 480px;
-    display: flex;
-    flex-direction: column;
-    .name{
+    @include flex-column;
+    align-items: flex-start;
+    .name {
       margin: 0;
       font-size: 36px;
       font-weight: 500;
     }
-    .description-short{
+    .description-short {
       margin-top: 30px;
       line-height: 30px;
     }
-    .description{
+    .description {
       font-size: 12px;
       margin-top: 20px;
       line-height: 20px;
     }
-    .divider{
+    .divider {
       display: flex;
-      margin: 30px 0 20px -5px ;
-      div{
+      margin: 30px 0 20px -5px;
+      div {
         height: 14px;
         width: 14px;
         border-top: 1px solid #000000;
         transform: rotate(45deg);
       }
     }
-    .checkInAndOut{
+    .checkInAndOut {
       display: flex;
-      div{
-        display: flex;
-        flex-direction: column;
-        span:last-child{
+      div {
+        @include flex-column;
+        span:last-child {
           font-size: 21px;
           line-height: 30px;
         }
-        &:last-child{
+        &:last-child {
           margin-left: 96px;
         }
       }
     }
   }
 
-  .room-price{
-    display: flex;
-    flex-direction: column;
+  .room-price {
+    @include flex-column;
     align-items: flex-end;
     padding-left: 38px;
-    .normal-day{
+    .normal-day {
       font-size: 30px;
       line-height: 40px;
     }
-    .holiday-day{
+    .holiday-day {
       font-size: 16px;
       margin-top: 10px;
     }
-    span{
-      line-height: 27px
+    span {
+      line-height: 27px;
     }
-    span:nth-child(2n){
-      color: #6D7278;    
+    span:nth-child(2n) {
+      color: #6d7278;
     }
   }
-
 }
-

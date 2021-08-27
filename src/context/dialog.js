@@ -30,12 +30,12 @@ function reducer(dialogState, action) {
         info: null,
       };
 
-      case DIALOG.ERROR:
-        return {
-          state: true,
-          dialogName: DIALOG.ERROR,
-          info: action.payload,
-        };
+    case DIALOG.ERROR:
+      return {
+        state: true,
+        dialogName: DIALOG.ERROR,
+        info: action.payload,
+      };
 
     case DIALOG.CLOSE:
       return {
