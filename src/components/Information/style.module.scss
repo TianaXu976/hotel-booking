@@ -60,6 +60,7 @@
       display: flex;
       div {
         @include flex-column;
+        align-items: flex-start;
         span:last-child {
           font-size: 21px;
           line-height: 30px;

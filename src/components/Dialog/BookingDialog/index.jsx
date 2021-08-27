@@ -18,7 +18,7 @@ import Modal from "@material-ui/core/Modal";
 
 // components
 import CalendarDialog from "./CalendarDialog";
-import Loading from "../../Loading";
+import Loading from "../../base/Loading";
 
 // utils
 import dayCalculate from "./dayCalculate";
