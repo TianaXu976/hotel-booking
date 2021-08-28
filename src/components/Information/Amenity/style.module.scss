@@ -26,3 +26,11 @@
     }
   }
 }
+
+@media screen and (max-width: 500px) {
+  .amenities {
+    .amenity {
+      width: 110px;
+    }
+  }
+}

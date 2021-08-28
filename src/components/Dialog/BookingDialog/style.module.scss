@@ -110,3 +110,14 @@
 .loading{
  margin: auto;
 }
+
+@media screen and (max-width: 600px) {
+  .booking-info {
+    flex-direction: column;
+    align-items: flex-start;
+    span {
+      margin-bottom: 10px;
+    }
+
+  }
+}

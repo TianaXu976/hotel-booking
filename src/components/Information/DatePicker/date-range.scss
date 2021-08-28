@@ -13,3 +13,9 @@
 .rdrDayToday .rdrStartEdge {
   background: none;
 }
+
+@media screen and (max-width: 600px) {
+  .rdrCalendarWrapper {
+    width: 300px;
+  }
+}
