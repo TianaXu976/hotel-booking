@@ -10,7 +10,7 @@ import Dialog from "./components/Dialog";
 import { DialogContext } from "./context/dialog";
 
 // router
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
 
 function App() {
@@ -19,9 +19,10 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <Redirect from="/hotel-booking" to="/" />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/:id" component={Room} />
+          <Route path="/:id" exact component={Room} />
         </Switch>
       </Router>
       {dialogState.state && <Dialog dialogState={dialogState} />}
