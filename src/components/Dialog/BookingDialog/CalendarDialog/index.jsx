@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./calendar.scss";
 import PropTypes from "prop-types";
 
@@ -8,16 +8,19 @@ import { Calendar } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
+// context
+import { BookingRangeContext } from "../../../../context/bookingRange"
+
 CalendarDialog.propTypes = {
   dateValue: PropTypes.object,
   type: PropTypes.string,
   onClickAction: PropTypes.func,
-  bookingRange: PropTypes.array,
 };
 
 export default function CalendarDialog(props) {
-  const { dateValue, type, onClickAction, bookingRange } = props;
-  
+  const { dateValue, type, onClickAction } = props;
+  const { bookingRange } = useContext(BookingRangeContext);
+
   const handleChange = (item) => {
   onClickAction(type, item);
   };

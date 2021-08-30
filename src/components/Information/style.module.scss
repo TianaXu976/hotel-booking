@@ -94,15 +94,13 @@
   }
 }
 
-@media screen and (max-width:  600px) {
+@media screen and (max-width: 600px) {
   .room-info {
     padding: 47px 10px;
-    // flex-direction: column;
 
     .room-price {
       align-items: center;
       width: 100%;
-      // justify-content: center;
     }
   }
 }

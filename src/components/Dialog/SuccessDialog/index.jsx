@@ -7,6 +7,10 @@ import { ReactComponent as Tick } from "../../../img/tick-inside-circle.svg";
 
 // context
 import { DialogContext, DIALOG } from "../../../context/dialog";
+import {
+  BookingRangeContext,
+  BOOKING_ACTION,
+} from "../../../context/bookingRange";
 
 //lib
 import Dialog from "@material-ui/core/Dialog";
@@ -14,16 +18,23 @@ import Dialog from "@material-ui/core/Dialog";
 const cx = classnames.bind(styles);
 
 export default function SuccessDialog() {
-  const { dialogDispatch } = useContext(DialogContext);
+  const { dialogState, dialogDispatch } = useContext(DialogContext);
+  const { bookingRangeDispatch } = useContext(BookingRangeContext);
+
+
+  const handleClose = () => {
+    dialogDispatch({
+      type: DIALOG.CLOSE,
+    });
+    bookingRangeDispatch({
+      type: BOOKING_ACTION.BOOKING_DATE,
+      payload: dialogState.info
+    });
+  }
   return (
     <Dialog
       open={true}
-      onClose={() => {
-        dialogDispatch({
-          type: DIALOG.CLOSE,
-        });
-        window.location.reload();
-      }}
+      onClose={handleClose}
       aria-labelledby="form-dialog-title"
       className="success-dialog"
     >
@@ -38,12 +49,7 @@ export default function SuccessDialog() {
       <Tick className={cx("tick")} />
       <button
         className={cx("back-btn")}
-        onClick={() => {
-          dialogDispatch({
-            type: DIALOG.CLOSE,
-          });
-          window.location.reload();
-        }}
+        onClick={handleClose}
       >
         回頁面
       </button>

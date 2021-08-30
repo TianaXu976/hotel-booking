@@ -35,7 +35,6 @@ BookingDialog.propTypes = {
   dateRange: PropTypes.object,
   price: PropTypes.object,
   roomId: PropTypes.string,
-  bookingRange: PropTypes.array,
 };
 
 const DATE_TYPE = {
@@ -66,7 +65,7 @@ function typeReducer(dateValue, action) {
 
 export default function BookingDialog() {
   const { dialogState, dialogDispatch } = useContext(DialogContext);
-  const { dateRange, price, roomId, bookingRange } = dialogState.info;
+  const { dateRange, price, roomId } = dialogState.info;
 
   const nameRef = useRef();
   const phoneRef = useRef();
@@ -120,7 +119,7 @@ export default function BookingDialog() {
     const bookingData = {
       name,
       tel,
-      date: dayCalculate(dateValue).dateData,
+      date: days.dateData,
     };
 
     setLoading(true);
@@ -129,13 +128,15 @@ export default function BookingDialog() {
       .then((response) => {
         dialogDispatch({
           type: DIALOG.SUCCESS,
+          payload: response.data.booking
         });
+        
       })
-      .catch((error) =>
+      .catch((error) =>{
         dialogDispatch({
           type: DIALOG.ERROR,
           payload: error.response.data.message,
-        })
+        })}
       );
   };
 
@@ -253,7 +254,6 @@ export default function BookingDialog() {
           dateValue={dateValue}
           type={openCalendar.type}
           onClickAction={onClickAction}
-          bookingRange={bookingRange}
         />
       </Popover>
     </Dialog>

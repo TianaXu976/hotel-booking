@@ -11,13 +11,13 @@ import { ReactComponent as Logo } from "../../img/logo_white.svg";
 import Contact from "./Contact";
 import RoomCard from "./RoomCard";
 
-
 const cx = classnames.bind(styles);
 const bannerList = ["room_4-2", "room_5-1", "room_5-3"];
 
 export default function RoomList() {
   const [bannerImg, setBannerImg] = useState(bannerList[0]);
   const [roomList, setRoomList] = useState([]);
+
 
   useEffect(() => {
     const timeId = setInterval(() => {
@@ -34,7 +34,7 @@ export default function RoomList() {
       .then((response) => setRoomList(response.data.items))
       .catch((error) => console.error(error));
   }, []);
-
+  
   return (
     <div className={cx("container")}>
       <div

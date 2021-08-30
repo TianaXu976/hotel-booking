@@ -9,6 +9,7 @@ import App from "./App";
 
 // context
 import DialogProvider from "./context/dialog";
+import BookingRangeProvider from "./context/bookingRange";
 
 // lib
 import {
@@ -21,9 +22,11 @@ const theme = unstable_createMuiStrictModeTheme();
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <DialogProvider>
-        <App />
-      </DialogProvider>
+      <BookingRangeProvider>
+        <DialogProvider>
+          <App />
+        </DialogProvider>
+      </BookingRangeProvider>
     </ThemeProvider>
   </React.StrictMode>,
 

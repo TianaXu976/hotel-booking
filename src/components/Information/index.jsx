@@ -22,6 +22,7 @@ export default function Information() {
 
   const history = useHistory();
 
+
   useEffect(() => {
     getInfomation(history.location.pathname)
       .then((response) => setData(response.data))
@@ -37,7 +38,7 @@ export default function Information() {
   }
 
   const info = data.room[0];
-  const bookingDate = data.booking;
+  const booking = data.booking;
 
   return (
     <div className={cx("container")}>
@@ -69,7 +70,7 @@ export default function Information() {
             <div>
               <span>Check In</span>
               <span>
-                {info.checkInAndOut["checkInEarly"]} -{" "}
+                {info.checkInAndOut["checkInEarly"]} -
                 {info.checkInAndOut["checkInLate"]}
               </span>
             </div>
@@ -86,12 +87,16 @@ export default function Information() {
           <span className={cx("holiday-day")}>NT.{info.holidayPrice}</span>
           <span>假日(五～日)</span>
         </div>
-
-        <DatePicker
-          price={{ normalDay: info.normalDayPrice, holiday: info.holidayPrice }}
-          roomId={info.id}
-          bookingDate={bookingDate}
-        />
+        
+          <DatePicker
+            price={{
+              normalDay: info.normalDayPrice,
+              holiday: info.holidayPrice,
+            }}
+            roomId={info.id}
+            booking={booking}
+          />
+  
       </div>
     </div>
   );

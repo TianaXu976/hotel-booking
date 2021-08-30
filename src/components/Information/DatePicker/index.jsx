@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import classnames from "classnames/bind";
 import styles from "./style.module.scss";
 import PropTypes from "prop-types";
 
 // lib
-import dayjs from "dayjs";
+
 import { addDays } from "date-fns";
 import { DateRange } from "react-date-range";
 import "./date-range.scss";
@@ -13,27 +13,32 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 
 // context
 import { DialogContext, DIALOG } from "../../../context/dialog";
+import {
+  BookingRangeContext,
+  BOOKING_ACTION,
+} from "../../../context/bookingRange";
 
 const cx = classnames.bind(styles);
 
 DatePicker.propTypes = {
   price: PropTypes.object,
   roomId: PropTypes.string,
-  bookingDate: PropTypes.array,
+  booking: PropTypes.array,
 };
 
-export default function DatePicker({ price, roomId, bookingDate }) {
-  const { dialogDispatch } = useContext(DialogContext);
-  
-  const [btnState, setBtnState] = useState(true);
-  const [date, setDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
+const initDate = {
+  startDate: new Date(),
+  endDate: new Date(),
+  key: "selection",
+};
 
+export default function DatePicker({ price, roomId, booking }) {
+  const { dialogDispatch } = useContext(DialogContext);
+  const { bookingRange, bookingRangeDispatch } =
+    useContext(BookingRangeContext);
+
+  const [btnState, setBtnState] = useState(true);
+  const [date, setDate] = useState([initDate]);
 
   const dateRange = {
     startDate: date[0].startDate,
@@ -43,7 +48,7 @@ export default function DatePicker({ price, roomId, bookingDate }) {
   const handleClickOpen = () => {
     dialogDispatch({
       type: DIALOG.BOOKING,
-      payload: { dateRange, price, roomId, bookingRange },
+      payload: { dateRange, price, roomId },
     });
   };
 
@@ -52,9 +57,17 @@ export default function DatePicker({ price, roomId, bookingDate }) {
     setBtnState(false);
   };
 
-  const bookingRange = bookingDate.map((element) =>
-    dayjs(element.date).toDate()
-  );
+  useEffect(() => {
+    bookingRangeDispatch({
+      type: BOOKING_ACTION.INIT_DATA,
+      payload: booking,
+    });
+  }, [booking, bookingRangeDispatch]);
+
+  useEffect(() => {
+    setBtnState(true);
+    setDate([initDate]);
+  }, [bookingRange]);
 
   return (
     <div className={cx("date-picker")}>

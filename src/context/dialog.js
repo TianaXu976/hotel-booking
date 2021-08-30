@@ -27,7 +27,7 @@ function reducer(dialogState, action) {
       return {
         state: true,
         dialogName: DIALOG.SUCCESS,
-        info: null,
+        info: action.payload,
       };
 
     case DIALOG.ERROR:
