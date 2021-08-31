@@ -4,7 +4,7 @@ import styles from "./style.module.scss";
 
 // api
 import { getRooms } from "../../api";
-import useApi from "../../api/useApi"
+import useApi from "../../api/useApi";
 
 // components
 import Loading from "../base/Loading";
@@ -20,7 +20,6 @@ export default function RoomList() {
   const [roomList, setRoomList] = useState([]);
   const { getApiResult } = useApi(getRooms);
 
-
   useEffect(() => {
     const timeId = setInterval(() => {
       bannerList.push(bannerList.shift());
@@ -31,16 +30,15 @@ export default function RoomList() {
       clearInterval(timeId);
     };
   }, []);
-  
-  
-  
+
   useEffect(() => {
-    getApiResult()
-    .then((response) => setRoomList(response.data.items))
-    
+    getApiResult().then((response) => {
+      if (response) {
+        setRoomList(response.data.items);
+      }
+    });
   }, [getApiResult]);
 
-  
   return (
     <div className={cx("container")}>
       <div
@@ -49,7 +47,7 @@ export default function RoomList() {
           background: `url(${require(`../../img/${bannerImg}.jpeg`)}) no-repeat center center /cover`,
         }}
       >
-        <Logo className={cx("logo")} title="logo"/>
+        <Logo className={cx("logo")} title="logo" />
         <Contact />
       </div>
       {roomList.length > 0 ? (

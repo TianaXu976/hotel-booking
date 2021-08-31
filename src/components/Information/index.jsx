@@ -26,7 +26,9 @@ export default function Information() {
 
   useEffect(() => {
     getApiResult(history.location.pathname).then((response) => {
+      if (response) {
         setData(response.data);
+      }
     });
   }, [history.location.pathname, getApiResult]);
 
