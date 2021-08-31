@@ -23,14 +23,6 @@ export default function ErrorDialog() {
       aria-labelledby="form-dialog-title"
       className="error-dialog"
     >
-      <div className={cx("title")}>
-        <h2>預約失敗</h2>
-      </div>
-      <div className={cx("divider")}>
-        <div />
-        <div />
-        <div />
-      </div>
       <div className={cx("message")}>{dialogState.info}</div>
       <button
         className={cx("back-btn")}

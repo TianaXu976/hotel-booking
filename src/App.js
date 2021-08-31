@@ -19,8 +19,8 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Redirect from="/hotel-booking" to="/" />
         <Switch>
+        <Redirect from="/hotel-booking" to="/" />
           <Route path="/" exact component={Home} />
           <Route path="/:id" exact component={Room} />
         </Switch>

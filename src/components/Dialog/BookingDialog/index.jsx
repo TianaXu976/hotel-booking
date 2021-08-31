@@ -25,6 +25,7 @@ import dayCalculate from "./dayCalculate";
 
 // api
 import { bookingRoom } from "../../../api";
+import  useApi  from "../../../api/useApi";
 
 // context
 import { DialogContext, DIALOG } from "../../../context/dialog";
@@ -66,6 +67,7 @@ function typeReducer(dateValue, action) {
 export default function BookingDialog() {
   const { dialogState, dialogDispatch } = useContext(DialogContext);
   const { dateRange, price, roomId } = dialogState.info;
+  const { getApiResult } = useApi(bookingRoom);
 
   const nameRef = useRef();
   const phoneRef = useRef();
@@ -124,23 +126,15 @@ export default function BookingDialog() {
 
     setLoading(true);
 
-    bookingRoom(roomId, bookingData)
-      .then((response) => {
+    getApiResult(roomId, bookingData).then((response) => {
+      if(response) {
         dialogDispatch({
           type: DIALOG.SUCCESS,
-          payload: response.data.booking
+          payload: response.data.booking,
         });
-        
-      })
-      .catch((error) =>{
-        dialogDispatch({
-          type: DIALOG.ERROR,
-          payload: error.response.data.message,
-        })}
-      );
+      }
+    });
   };
-
-  
 
   if (loading) {
     return (

@@ -1,30 +1,13 @@
 @import '../../../styles/mixins';
 
-.title {
-  width: 423px;
-  h2 {
-    font-size: 24px;
-    font-weight: 500;
-    padding: 5px 42px;
-  }
-}
 
-.divider {
-  display: flex;
-  padding: 0px 36px 10px 36px;
-  div {
-    height: 14px;
-    width: 14px;
-    border-top: 1px solid #000000;
-    transform: rotate(45deg);
-  }
-}
 
 .message{
   font-weight: 400;
   height: 60%;
-  margin: auto;
-  width: 80%
+  margin: 40px auto 20px auto;
+  max-width: 423px;
+  padding: 0 30px;
 }
 
 .back-btn{

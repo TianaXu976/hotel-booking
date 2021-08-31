@@ -4,6 +4,7 @@ import styles from "./style.module.scss";
 
 // api
 import { getInfomation } from "../../api";
+import useApi from "../../api/useApi";
 
 // components
 import { ReactComponent as Logo } from "../../img/logo_block.svg";
@@ -18,16 +19,16 @@ import { useHistory } from "react-router-dom";
 const cx = classnames.bind(styles);
 
 export default function Information() {
+  const { getApiResult } = useApi(getInfomation);
   const [data, setData] = useState();
 
   const history = useHistory();
 
-
   useEffect(() => {
-    getInfomation(history.location.pathname)
-      .then((response) => setData(response.data))
-      .catch((error) => console.error(error));
-  }, [history.location.pathname]);
+    getApiResult(history.location.pathname).then((response) => {
+        setData(response.data);
+    });
+  }, [history.location.pathname, getApiResult]);
 
   if (!data) {
     return (
@@ -87,16 +88,15 @@ export default function Information() {
           <span className={cx("holiday-day")}>NT.{info.holidayPrice}</span>
           <span>假日(五～日)</span>
         </div>
-        
-          <DatePicker
-            price={{
-              normalDay: info.normalDayPrice,
-              holiday: info.holidayPrice,
-            }}
-            roomId={info.id}
-            booking={booking}
-          />
-  
+
+        <DatePicker
+          price={{
+            normalDay: info.normalDayPrice,
+            holiday: info.holidayPrice,
+          }}
+          roomId={info.id}
+          booking={booking}
+        />
       </div>
     </div>
   );
