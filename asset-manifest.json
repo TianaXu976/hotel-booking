@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/hotel-booking/static/css/main.f5771c5d.chunk.css",
-    "main.js": "/hotel-booking/static/js/main.aa7f6f01.chunk.js",
-    "main.js.map": "/hotel-booking/static/js/main.aa7f6f01.chunk.js.map",
+    "main.js": "/hotel-booking/static/js/main.debe8923.chunk.js",
+    "main.js.map": "/hotel-booking/static/js/main.debe8923.chunk.js.map",
     "runtime-main.js": "/hotel-booking/static/js/runtime-main.20331acb.js",
     "runtime-main.js.map": "/hotel-booking/static/js/runtime-main.20331acb.js.map",
     "static/css/2.e47cb6b7.chunk.css": "/hotel-booking/static/css/2.e47cb6b7.chunk.css",
@@ -35,6 +35,6 @@
     "static/css/2.e47cb6b7.chunk.css",
     "static/js/2.05fcaba2.chunk.js",
     "static/css/main.f5771c5d.chunk.css",
-    "static/js/main.aa7f6f01.chunk.js"
+    "static/js/main.debe8923.chunk.js"
   ]
 }
