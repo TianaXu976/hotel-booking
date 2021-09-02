@@ -24,13 +24,16 @@ export default function Information() {
 
   const history = useHistory();
 
+  const url = history.location.pathname.split('/hotel-booking')[1]
+
   useEffect(() => {
-    getApiResult(history.location.pathname).then((response) => {
+    getApiResult(url).then((response) => {
       if (response) {
         setData(response.data);
       }
     });
   }, [history.location.pathname, getApiResult]);
+  console.log(history.location.pathname.split('/hotel-booking')[1]);
 
   if (!data) {
     return (

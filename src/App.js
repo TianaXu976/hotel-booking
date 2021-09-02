@@ -20,9 +20,9 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-        <Redirect from="/hotel-booking" to="/" />
-          <Route path="/" exact component={Home} />
-          <Route path="/:id" exact component={Room} />
+        {/* <Redirect from="/hotel-booking" to="/" /> */}
+          <Route path="/hotel-booking" exact component={Home} />
+          <Route path="/hotel-booking/:id" exact component={Room} />
         </Switch>
       </Router>
       {dialogState.state && <Dialog dialogState={dialogState} />}
