@@ -15,7 +15,7 @@ const cx = classnames.bind(styles);
 export default function RoomCard({ info }) {
   return (
     <div className={cx("room-card")}>
-      <Link to={`/hotel-booking/${info.id}`}>
+      <Link to={`/${info.id}`}>
         <div className={cx("room-photo")}>
           <img src={info.imageUrl} alt="preview" />
         </div>

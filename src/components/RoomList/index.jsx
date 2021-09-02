@@ -25,7 +25,6 @@ export default function RoomList() {
       bannerList.push(bannerList.shift());
       setBannerImg(bannerList[0]);
     }, 4000);
-    console.log(timeId);
     return () => {
       clearInterval(timeId);
     };

@@ -23,18 +23,16 @@ export default function Information() {
   const [data, setData] = useState();
 
   const history = useHistory();
-
-  const url = history.location.pathname.split('/hotel-booking')[1]
+  
 
   useEffect(() => {
-    getApiResult(url).then((response) => {
+    getApiResult(history.location.pathname).then((response) => {
       if (response) {
         setData(response.data);
       }
     });
   }, [history.location.pathname, getApiResult]);
-  console.log(history.location.pathname.split('/hotel-booking')[1]);
-
+  
   if (!data) {
     return (
       <div className={cx("loading")}>
