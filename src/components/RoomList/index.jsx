@@ -36,6 +36,7 @@ export default function RoomList() {
         setRoomList(response.data.items);
       }
     });
+    
   }, [getApiResult]);
 
   return (
