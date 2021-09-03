@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/hotel-booking/static/css/main.6f6fbfd4.chunk.css",
+    "main.css": "/hotel-booking/static/css/main.caaddcdb.chunk.css",
     "main.js": "/hotel-booking/static/js/main.3bfd9266.chunk.js",
     "main.js.map": "/hotel-booking/static/js/main.3bfd9266.chunk.js.map",
     "runtime-main.js": "/hotel-booking/static/js/runtime-main.1af062ef.js",
@@ -12,7 +12,7 @@
     "static/js/3.6e92cc98.chunk.js.map": "/hotel-booking/static/js/3.6e92cc98.chunk.js.map",
     "index.html": "/hotel-booking/index.html",
     "static/css/2.e47cb6b7.chunk.css.map": "/hotel-booking/static/css/2.e47cb6b7.chunk.css.map",
-    "static/css/main.6f6fbfd4.chunk.css.map": "/hotel-booking/static/css/main.6f6fbfd4.chunk.css.map",
+    "static/css/main.caaddcdb.chunk.css.map": "/hotel-booking/static/css/main.caaddcdb.chunk.css.map",
     "static/js/2.6a582a6b.chunk.js.LICENSE.txt": "/hotel-booking/static/js/2.6a582a6b.chunk.js.LICENSE.txt",
     "static/media/envelope-solid.cd047432.svg": "/hotel-booking/static/media/envelope-solid.cd047432.svg",
     "static/media/facebook-square-brands.38c6b4e5.svg": "/hotel-booking/static/media/facebook-square-brands.38c6b4e5.svg",
@@ -30,7 +30,7 @@
     "static/js/runtime-main.1af062ef.js",
     "static/css/2.e47cb6b7.chunk.css",
     "static/js/2.6a582a6b.chunk.js",
-    "static/css/main.6f6fbfd4.chunk.css",
+    "static/css/main.caaddcdb.chunk.css",
     "static/js/main.3bfd9266.chunk.js"
   ]
 }
